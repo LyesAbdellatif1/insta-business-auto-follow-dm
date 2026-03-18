@@ -10,6 +10,7 @@ services:
     environment:
       - DEV=true
       - DOCKER=true
+      - DATA_DIR_PATH=/app/data
     ports:
       - "3123:3123"
     command: pnpm run start
