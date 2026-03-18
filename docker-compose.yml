@@ -1,13 +1,20 @@
+version: "3.9"
+
 services:
   short-creator:
     build:
       context: .
-      dockerfile: main.Dockerfile
+      dockerfile: main.Dockerfile # set environment variable DOCKERFILE
     env_file:
-      - .env # ← This line makes Docker load your PEXELS_API_KEY
+      - .env
     environment:
-      # Optional override, can remove DEV if you want .env to control it
-      DEV: "true"
+      - DEV=true
     ports:
       - "3123:3123"
-    entrypoint: ["node", "dist/index.js"]
+    command: pnpm run start
+    volumes:
+      - ./src:/app/src
+      - ./static:/app/static
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+    restart: unless-stopped
