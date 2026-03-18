@@ -61,6 +61,10 @@ export class Remotion {
       // preventing memory issues with docker
       concurrency: this.config.concurrency,
       offthreadVideoCacheSizeInBytes: this.config.videoCacheSizeInBytes,
+      chromiumOptions: {
+        disableWebSecurity: true,
+        ignoreCertificateErrors: true,
+      },
     });
 
     logger.debug(
